@@ -14,9 +14,21 @@ app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 // Use handlebars to render
 app.set('view engine', 'handlebars');
 
-// Render the "home" layout for the main page and send the following msg
+// // Render the "home" layout for the main page and send the following msg
+// app.get('/', (req, res) => {
+//   res.render('home', { msg: 'Handlebars are Cool!' });
+// })
+
+// OUR MOCK ARRAY OF PROJECTS
+var charities = [
+  { title: "I am your first charity", desc: "A great charity that is super fun to look at and good", imgUrl: "https://img.purch.com/w/660/aHR0cDovL3d3dy5saXZlc2NpZW5jZS5jb20vaW1hZ2VzL2kvMDAwLzA4OC85MTEvb3JpZ2luYWwvZ29sZGVuLXJldHJpZXZlci1wdXBweS5qcGVn" },
+  { title: "I am your second charity", desc: "A great charity that is super fun to look at and good", imgUrl: "https://img.purch.com/w/660/aHR0cDovL3d3dy5saXZlc2NpZW5jZS5jb20vaW1hZ2VzL2kvMDAwLzA4OC85MTEvb3JpZ2luYWwvZ29sZGVuLXJldHJpZXZlci1wdXBweS5qcGVn" },
+  { title: "I am your third charity", desc: "A great charitythat is super fun to look at and good", imgUrl: "https://img.purch.com/w/660/aHR0cDovL3d3dy5saXZlc2NpZW5jZS5jb20vaW1hZ2VzL2kvMDAwLzA4OC85MTEvb3JpZ2luYWwvZ29sZGVuLXJldHJpZXZlci1wdXBweS5qcGVn" }
+]
+
+// INDEX
 app.get('/', (req, res) => {
-  res.render('home', { msg: 'Handlebars are Cool!' });
+  res.render('charities-index', { charities: charities });
 })
 
 // Tell the app what port to listen on
