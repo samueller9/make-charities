@@ -21,9 +21,9 @@ app.set('view engine', 'handlebars');
 
 // OUR MOCK ARRAY OF PROJECTS
 var charities = [
-  { title: "I am your first charity", desc: "A great charity that is super fun to look at and good", imgUrl: "https://img.purch.com/w/660/aHR0cDovL3d3dy5saXZlc2NpZW5jZS5jb20vaW1hZ2VzL2kvMDAwLzA4OC85MTEvb3JpZ2luYWwvZ29sZGVuLXJldHJpZXZlci1wdXBweS5qcGVn" },
-  { title: "I am your second charity", desc: "A great charity that is super fun to look at and good", imgUrl: "https://img.purch.com/w/660/aHR0cDovL3d3dy5saXZlc2NpZW5jZS5jb20vaW1hZ2VzL2kvMDAwLzA4OC85MTEvb3JpZ2luYWwvZ29sZGVuLXJldHJpZXZlci1wdXBweS5qcGVn" },
-  { title: "I am your third charity", desc: "A great charitythat is super fun to look at and good", imgUrl: "https://img.purch.com/w/660/aHR0cDovL3d3dy5saXZlc2NpZW5jZS5jb20vaW1hZ2VzL2kvMDAwLzA4OC85MTEvb3JpZ2luYWwvZ29sZGVuLXJldHJpZXZlci1wdXBweS5qcGVn" }
+  { title: "I am your first charity", desc: "A great charity that is super fun to look at and good", imgUrl: "https://pics.paypal.com/00/s/NmVkNTlhZWQtYTc1Ni00ZTBiLTk5OTEtYWI2ZjNmOGU4OWNk/file.JPG" },
+  { title: "I am your second charity", desc: "A great charity that is super fun to look at and good", imgUrl: "https://www.thespruceeats.com/thmb/HFHareCtMR4mwSQ7cHAGtdiICFs=/640x380/filters:no_upscale():max_bytes(150000):strip_icc()/734039_10151500368212731_627225972_n-589a0ff73df78caebc1f6c2d.jpg" },
+  { title: "I am your third charity", desc: "A great charitythat is super fun to look at and good", imgUrl: "https://photos.prnewswire.com/prn/20090108/RedCrossLOGO" }
 ]
 
 // INDEX
