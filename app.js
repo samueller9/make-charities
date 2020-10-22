@@ -37,8 +37,8 @@ app.get('/charities/new', (req, res) => {
 
 // CREATE
 app.post('/charities', (req, res) => {
-  models.Charities.create(req.body).then(event => {
-    res.redirect(`/`);
+  models.Charities.create(req.body).then(charities => {
+    res.redirect(`/charities/${charities.id}`);
   }).catch((err) => {
     console.log(err)
   });
@@ -51,6 +51,17 @@ app.get('/charities/search', (req, res) => {
     res.render('charities-search')
   })
 
+  // SHOW
+  app.get('/charities/:id', (req, res) => {
+    // Search for the event by its id that was passed in via req.params
+    models.Charities.findByPk(req.params.id).then((charities) => {
+      // If the id is for a valid event, show it
+      res.render('charities-show', { charities: charities })
+    }).catch((err) => {
+      // if they id was for an event not in our db, log an error
+      console.log(err.message);
+    })
+  })
 
 // Tell the app what port to listen on
 app.listen(port, () => {
