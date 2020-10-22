@@ -51,7 +51,7 @@ app.post('/charities', (req, res) => {
 //SEARCH
 app.get('/charities/search', (req, res) => {
     res.render('charities-search')
-  })
+  });
 
   // SHOW
   app.get('/charities/:id', (req, res) => {
@@ -62,8 +62,8 @@ app.get('/charities/search', (req, res) => {
     }).catch((err) => {
       // if they id was for an charities not in our db, log an error
       console.log(err.message);
-    })
-  })
+    });
+  });
 
   // EDIT
 app.get('/charities/:id/edit', (req, res) => {
@@ -76,7 +76,7 @@ app.get('/charities/:id/edit', (req, res) => {
 
 // UPDATE
 app.put('/charities/:id', (req, res) => {
-  models.charities.findByPk(req.params.id).then(charities => {
+  models.Charities.findByPk(req.params.id).then(charities => {
     charities.update(req.body).then(charities => {
       res.redirect(`/charities/${req.params.id}`);
     }).catch((err) => {
