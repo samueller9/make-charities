@@ -1,18 +1,29 @@
-<div class="row mt-4">
+<div class="row mt-1">
       <div class="col-lg-6 offset-lg-3">
-          <h1>Charities</h1>
+
+
+          <h1 class="text-center mt-2">Most Popular Charities</h1>
           {{#each charities}}
           <div class="card mt-3">
             <img class="card-img-top" src="{{this.imgUrl}}" alt="Card image cap">
-            <div class="card-body">
+            <div class="card-body bg-dark text-white">
               <h5 class="card-title">{{this.title}}</h5>
               <p class="card-text">{{this.desc}}</p>
+              <a class="card-link">{{this.websiteUrl}}</a>
               <div class="text-right">
-                <a href="#" class="btn btn-primary">View</a>
+                <a href="#" class="btn btn-primary">Learn More</a>
                 <a href="#" class="btn btn-danger">Donate</a>
               </div>
             </div>
           </div>
           {{/each}}
+          <div class="text-center m-3 ">
+            <a href="#">MORE...</a>
+          </div>
+
+          <div class="text-center mb-4">
+            <h1 class="mt-5">Don't see your charity?</h1>
+            <a href="/charities/new">ADD IT HERE!</a>
+          </div>
       </div>
   </div>
