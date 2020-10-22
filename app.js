@@ -1,12 +1,13 @@
 // Initialize express
 const express = require('express')
-const app = express()
+const methodOverride = require('method-override');
 const exphbs = require('express-handlebars');
 const port = process.env.PORT || 3000;
 const bodyParser = require('body-parser');
 const models = require('./db/models');
 const Handlebars = require('handlebars')
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
+const app = express()
 
 app.engine('handlebars', exphbs({
   defaultLayout: 'main',
@@ -15,6 +16,7 @@ app.engine('handlebars', exphbs({
 
 app.set('view engine', 'handlebars');
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(methodOverride('_method'))
 
 var charities = [
   { title: "Alzheimer's Society: United Against Dementia", desc: "Alzheimer's Society is a United Kingdom care and research charity for people with dementia and their carers.", imgUrl: "https://pics.paypal.com/00/s/NmVkNTlhZWQtYTc1Ni00ZTBiLTk5OTEtYWI2ZjNmOGU4OWNk/file.JPG" },
@@ -53,15 +55,37 @@ app.get('/charities/search', (req, res) => {
 
   // SHOW
   app.get('/charities/:id', (req, res) => {
-    // Search for the event by its id that was passed in via req.params
+    // Search for the charities by its id that was passed in via req.params
     models.Charities.findByPk(req.params.id).then((charities) => {
-      // If the id is for a valid event, show it
+      // If the id is for a valid charities, show it
       res.render('charities-show', { charities: charities })
     }).catch((err) => {
-      // if they id was for an event not in our db, log an error
+      // if they id was for an charities not in our db, log an error
       console.log(err.message);
     })
   })
+
+  // EDIT
+app.get('/charities/:id/edit', (req, res) => {
+  models.Charities.findByPk(req.params.id).then((charities) => {
+    res.render('charities-edit', { charities: charities });
+  }).catch((err) => {
+    console.log(err.message);
+  })
+});
+
+// UPDATE
+app.put('/charities/:id', (req, res) => {
+  models.charities.findByPk(req.params.id).then(charities => {
+    charities.update(req.body).then(charities => {
+      res.redirect(`/charities/${req.params.id}`);
+    }).catch((err) => {
+      console.log(err);
+    });
+  }).catch((err) => {
+    console.log(err);
+  });
+});
 
 // Tell the app what port to listen on
 app.listen(port, () => {
