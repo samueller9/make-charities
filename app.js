@@ -7,7 +7,10 @@ const bodyParser = require('body-parser');
 const models = require('./db/models');
 const Handlebars = require('handlebars')
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access')
+
+
 const app = express()
+require('./controllers/charities')(app, models);
 
 app.engine('handlebars', exphbs({
   defaultLayout: 'main',
@@ -24,69 +27,6 @@ var charities = [
   { title: "American Red Cross", desc: "The American Red Cross, also known as The American National Red Cross, is a humanitarian organization that provides emergency assistance, disaster relief, and disaster preparedness education in the United States.", imgUrl: "https://photos.prnewswire.com/prn/20090108/RedCrossLOGO" }
 ]
 
-
-// INDEX
-app.get('/', (req, res) => {
-  models.Charities.findAll({ order: [['createdAt', 'DESC']] }).then(charities => {
-    res.render('charities-index', { charities: charities });
-  })
-})
-
-//NEW
-app.get('/charities/new', (req, res) => {
-  res.render('charities-new', {});
-})
-
-// CREATE
-app.post('/charities', (req, res) => {
-  models.Charities.create(req.body).then(charities => {
-    res.redirect(`/charities/${charities.id}`);
-  }).catch((err) => {
-    console.log(err)
-  });
-})
-//DONATE
-
-
-//SEARCH
-app.get('/charities/search', (req, res) => {
-    res.render('charities-search')
-  });
-
-  // SHOW
-  app.get('/charities/:id', (req, res) => {
-    // Search for the charities by its id that was passed in via req.params
-    models.Charities.findByPk(req.params.id).then((charities) => {
-      // If the id is for a valid charities, show it
-      res.render('charities-show', { charities: charities })
-    }).catch((err) => {
-      // if they id was for an charities not in our db, log an error
-      console.log(err.message);
-    });
-  });
-
-  // EDIT
-app.get('/charities/:id/edit', (req, res) => {
-  models.Charities.findByPk(req.params.id).then((charities) => {
-    res.render('charities-edit', { charities: charities });
-  }).catch((err) => {
-    console.log(err.message);
-  })
-});
-
-// UPDATE
-app.put('/charities/:id', (req, res) => {
-  models.Charities.findByPk(req.params.id).then(charities => {
-    charities.update(req.body).then(charities => {
-      res.redirect(`/charities/${req.params.id}`);
-    }).catch((err) => {
-      console.log(err);
-    });
-  }).catch((err) => {
-    console.log(err);
-  });
-});
-
 //DELETE
 app.delete('/charities/:id', (req, res) => {
   models.Charities.findByPk(req.params.id).then(charities => {
@@ -94,8 +34,10 @@ app.delete('/charities/:id', (req, res) => {
     res.redirect(`/`);
   }).catch((err) => {
     console.log(err);
-  });
-})
+    });
+  })
+
+
 // Tell the app what port to listen on
 app.listen(port, () => {
   console.log('App listening on port 3000!')
