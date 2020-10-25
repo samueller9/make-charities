@@ -27,7 +27,7 @@ var charities = [
 
 // INDEX
 app.get('/', (req, res) => {
-  models.Charities.findAll().then(charities => {
+  models.Charities.findAll({ order: [['createdAt', 'DESC']] }).then(charities => {
     res.render('charities-index', { charities: charities });
   })
 })
@@ -87,6 +87,15 @@ app.put('/charities/:id', (req, res) => {
   });
 });
 
+//DELETE
+app.delete('/charities/:id', (req, res) => {
+  models.Charities.findByPk(req.params.id).then(charities => {
+    charities.destroy();
+    res.redirect(`/`);
+  }).catch((err) => {
+    console.log(err);
+  });
+})
 // Tell the app what port to listen on
 app.listen(port, () => {
   console.log('App listening on port 3000!')
